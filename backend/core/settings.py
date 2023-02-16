@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from corsheaders.defaults import default_headers
+from corsheaders.defaults import default_headers # Para se trabalhar com API
 import os
 import environ
 env = environ.Env()
@@ -11,6 +11,7 @@ environ.Env.read_env()
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,6 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+# SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = 'django-insecure-8eh$q3z^ya4d7)u6(3^yh_628v(#*7v4039deqr1+8^$=rvw&g'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+#DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -34,15 +40,16 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
-
+    'corsheaders',
+    'blog'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-     "corsheaders.middleware.CorsMiddleware",
+    #Corsheaders
+    "corsheaders.middleware.CorsMiddleware",
 
 
     'django.middleware.common.CommonMiddleware',
@@ -55,16 +62,14 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
 
-    # O dominios e etc....
-
+    # O dominio pelo qual pode consumir dados da minha API
     "http://localhost:8080",
     "http://127.0.0.1:9000",
     "http://127.0.0.1:8000",
-
-
 ]
 
-CORS_ALLOWED_HEADERS = list(default_headers) + [
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
     'contenttype',
 ]
 
@@ -137,8 +142,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL  =  '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'midia')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
@@ -146,7 +155,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'midia')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# configurtação da nossa REST API
+
+# configuração da nossa REST API
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',

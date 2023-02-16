@@ -1,2 +1,19 @@
-# rest-api-django-vueJS
-Criando uma RestAPI com Django no backend e consumindo os dados da API com Vue JS no front-end
+# frontend
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
