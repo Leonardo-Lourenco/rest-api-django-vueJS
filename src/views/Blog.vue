@@ -29,7 +29,7 @@
 
                 <div v-for="posts in APIData" :key="posts.id" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
                     
-                    <router-link :to="{ neme: 'BlogPost', params: { id: posts.id, title: posts.title, slug: posts.slug }}">
+                    <router-link :to="{ name: 'BlogPost', params: { id: posts.id, title: posts.title, slug: posts.slug, content: posts.content}}">
 
                          <p>{{ posts.title }}</p>
 
